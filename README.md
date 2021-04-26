@@ -1,6 +1,6 @@
-# OOD Monitoring Using B-VAE
+# Out-of-Distribution Detection and Reasoning using Latent Space of B-Variational Autoencoder
 
-In this work we introduce the B-Variational Autoencoder (B-VAE) monitor to detect out-of-Distribution images and isolate the change in the factors (e.g.,brightness, precipitation,etc.). Typically, this is a multi-class classification problem solved using a chain of one-class classifiers. However, in this work we use a single efficient B-VAE monitor that uses the principle of disentanglement to train the latent space to be sensitive to distribution shifts in different generative factors. That is to say, we find the latent unit(s) encoding information about a generative factor and use it in an Inductive Conformal Prediction (ICP) framework to identify images that are OOD. 
+In this work we introduce the B-Variational Autoencoder (B-VAE) to detect out-of-Distribution images and identify the most likely feature (e.g.,brightness, precipitation,etc.) that caused the OOD. Typically, this is a multi-class classification problem solved using a chain of one-class classifiers. However, in this work we use a single efficient B-VAE deector that uses the principle of disentanglement to train the latent space to be sensitive to distribution shifts in different features. 
 
 We demonstrate our approach using an end-to-end driving controller in the CARLA simulator. 
 
