@@ -32,13 +32,13 @@ You will also need to install CARLA 0.9.6. See [link](https://carla.org/2019/07/
 
 1.  [Data generation](https://github.com/scope-lab-vu/BVAE-OOD-Detector/tree/main/data-generation) -- Generate CARLA scenes with varied weather parameters. 
 
-2. [lec-training](https://github.com/Shreyasramakrishna90/B-VAE-OOD-Monitor/tree/master/lec-training) -- Train an end-to-end LEC to steer the autonomous vehicle around CARLA towns. The LEC used here is based on [NVIDIA'S DAVE-II](https://arxiv-org.proxy.library.vanderbilt.edu/pdf/1604.07316.pdf?source=post_page---------------------------) DNN architecture.
+2. [lec-training](https://github.com/scope-lab-vu/BVAE-OOD-Detector/tree/main/lec-training) -- Train an end-to-end LEC to steer the autonomous vehicle around CARLA towns. The LEC used here is based on [NVIDIA'S DAVE-II](https://arxiv-org.proxy.library.vanderbilt.edu/pdf/1604.07316.pdf?source=post_page---------------------------) DNN architecture.
 
-2. [hyperparameter tuning](https://github.com/Shreyasramakrishna90/B-VAE-OOD-Monitor/tree/master/hyperparameter-tuning) -- Tune the B-VAE hyperparameters of Beta (B) and number of latent units (B). Three algorithms have been used in this work: Bayesian optimization, random search and grid search.
+2. [hyperparameter tuning](https://github.com/scope-lab-vu/BVAE-OOD-Detector/tree/main/hyperparameter-tuning) -- Tune the B-VAE hyperparameters of Beta (B) and number of latent units (B). Three algorithms have been used in this work: Bayesian optimization, random search and grid search.
 
-3. [latent-unit-extraction](https://github.com/Shreyasramakrishna90/B-VAE-OOD-Monitor/tree/master/latent-unit-extraction) -- Extract and plot latent units using the selected B-VAE monitor. Then compare the latent units across several CARLA scenes to select the detector latent units (Ld) and diagnoser latent units (Lf)
+3. [latent-unit-extraction](https://github.com/scope-lab-vu/BVAE-OOD-Detector/tree/main/latent-unit-extraction) -- Extract and plot latent units using the selected B-VAE monitor. Then compare the latent units across several CARLA scenes to select the detector latent units (Ld) and diagnoser latent units (Lf)
 
-4. [Carla-runtime-deployment](https://github.com/Shreyasramakrishna90/B-VAE-OOD-Monitor/tree/master/carla-runtime-deployment) -- Deploy the designed B-VAE monitor in CARLA simulation.
+4. [Carla-runtime-deployment](https://github.com/scope-lab-vu/BVAE-OOD-Detector/tree/main/carla-runtime-deployment) -- Deploy the designed B-VAE monitor in CARLA simulation.
 
 # Earlier Work
 
@@ -49,9 +49,11 @@ You will also need to install CARLA 0.9.6. See [link](https://carla.org/2019/07/
 
 # Extentions From the Earlier Work
 
-1. Data generation -- Data generator which uses random sampler to sample the CARLA weather parameters such as (sun, cloud, rain, illumination), and generate different scenes.
+1. Data generation -- Data generator using a Scenario Description Language (SDL) which uses random sampler to sample the CARLA weather parameters such as (sun, cloud, rain, illumination), and generate different scenes.
 
-2. Hyperparameter selection -- We perform Bayesian Optimization with [Mutual Information Gap](https://arxiv-org.proxy.library.vanderbilt.edu/pdf/1802.04942.pdf) as the optimization criteria to select the number of latent units (n) and B value. 
+2. Bayesian Optimization Heuristic -- We perform Bayesian Optimization with [Mutual Information Gap](https://arxiv-org.proxy.library.vanderbilt.edu/pdf/1802.04942.pdf) as the optimization criteria to select the number of latent units (n) and B value. 
+
+3. Latent Variable mapping Heuristic -- We perform a KL-divergence to perform a mapping between the latent variables and the features.
 
 3. Comparison to existing technologies -- We compare our B-VAE monitor (detection + diagnosis) with other techniques such as SVDD, VAE based reconstruction, SVDD-chain, and VAE-reconstruction-chain. 
 
