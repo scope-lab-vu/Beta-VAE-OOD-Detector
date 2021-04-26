@@ -14,7 +14,7 @@ We demonstrate our approach using an end-to-end driving controller in the CARLA 
 To run the CARLA setup with varied weather patterns and evaluate the B-VAE monitor, clone this repo.
 
 ```
-git clone https://github.com/Shreyasramakrishna90/B-VAE-OOD-Monitor
+git clone https://github.com/scope-lab-vu/BVAE-OOD-Detector.git
 ```
 Then create a conda environment with python 3.7 and install the requirements as follows.
 
@@ -30,7 +30,7 @@ You will also need to install CARLA 0.9.6. See [link](https://carla.org/2019/07/
 # Steps to implement the B-VAE monitor for OOD detection in CARLA simulator
 
 
-1.  [Data generation](https://github.com/Shreyasramakrishna90/B-VAE-OOD-Monitor/tree/master/data-generation) -- Generate CARLA scenes with varied weather parameters. 
+1.  [Data generation](https://github.com/scope-lab-vu/BVAE-OOD-Detector/tree/main/data-generation) -- Generate CARLA scenes with varied weather parameters. 
 
 2. [lec-training](https://github.com/Shreyasramakrishna90/B-VAE-OOD-Monitor/tree/master/lec-training) -- Train an end-to-end LEC to steer the autonomous vehicle around CARLA towns. The LEC used here is based on [NVIDIA'S DAVE-II](https://arxiv-org.proxy.library.vanderbilt.edu/pdf/1604.07316.pdf?source=post_page---------------------------) DNN architecture.
 
