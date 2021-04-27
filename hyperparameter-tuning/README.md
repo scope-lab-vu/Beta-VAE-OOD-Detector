@@ -1,6 +1,6 @@
-# B-VAE selection
+# Latent Space Encoding for B-VAE Hyperparameter Selection
 
-Scripts here are used to select hyperparameters, number of latent units (n) and B. Three hyperparameter tuning algorithms are tested.
+Scripts here are used to select hyperparameters, number of latent units (n) and B. Three hyperparameter tuning algorithms that are compared in our work.
 
 (1) Bayesian Optimization, (2) Random Search, and (3) Grid Search
 
