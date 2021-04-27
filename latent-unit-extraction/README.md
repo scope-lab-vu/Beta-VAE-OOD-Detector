@@ -8,7 +8,7 @@ Scripts to generate latent variables, and perform latent variable mapping. Figur
 
 LP - Partition latent variables with high variance in average KL-divergence\
 Ld - Detector latent variables\
-Lf - Reasoner Latent variables\
+Lf - Reasoner Latent variables
 
 ```
 
