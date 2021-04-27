@@ -1,6 +1,6 @@
 # Latent Variable Mapping
 
-Scripts to generate latent variables, and perform latent variable mapping. 
+Scripts to generate latent variables, and perform latent variable mapping. Figure illustrates the latent variable mapping heuristic
 
 <p align="center">
    <img src="https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/figures/latent-mapping.png" align="center" >
