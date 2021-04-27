@@ -1,4 +1,4 @@
-# Component Architecture
+# System Architecture
 
 The component architecture implemented in CARLA is:
 
