@@ -1,4 +1,4 @@
-# Data generation
+# data generation
 The script connects with CARLA 0.9.6 and generates different scenes by randomly varying CARLA weather parameters. To generate data run the following
 
 ```
