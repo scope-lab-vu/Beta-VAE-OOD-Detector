@@ -5,8 +5,8 @@ In this work we introduce the B-Variational Autoencoder (B-VAE) to detect out-of
 We demonstrate our approach using an end-to-end driving Autonomous Vehicle in the CARLA simulation. 
 
 <p align="center">
-  <img src="https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/videos/HP-scene.gif" />
-  <img src="https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/videos/HB-scene.gif" />
+  <img src="https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/Figures/HP-scene.gif" />
+  <img src="https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/Figures/HB-scene.gif" />
 </p>
 
 (a) **HP scene** where high precipitation is introduced into the scene. In this scene the detector martingale and the martingale of the precipitation reasoner increases when the high precipitation is introduced.
