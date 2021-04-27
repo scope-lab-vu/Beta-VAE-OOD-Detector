@@ -1,10 +1,13 @@
 # Latent unit generation and extraction
 
-These scripts generate latent distributions using a trained B-VAE. 
-Plots the mean and logVar of the latent distirubtions and performs a latent comparison to find the set of detector latent units and diagnoser latent units.
+Scripts to generate latent variables, and perform latent variable mapping
 
 ```
-run latent-csv-generator.ipynb        ---use the trained B-VAE weights to generate latent distribution csv's.
 
-run latent-unit-comparison.ipynb      ---use generated latent distibutions to select detector latent units Ld and diagnoser latent units Lf 
+python3 latent-csv-generator.py    --use the trained B-VAE weights to generate csv with latent variable parameters (mean, logvar, samples).
+
+python3 latent-unit-comparison.py  --generate csv with average kl-divergence of each latent variables for different scenes in a partition.
+
+python3 latent-unit-selection.py   --uses Welford's variance calculator to return latent variables Ld and Lf.
+
 ```
