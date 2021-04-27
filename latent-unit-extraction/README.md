@@ -10,4 +10,6 @@ python3 latent-unit-comparison.py  --generate csv with average kl-divergence of 
 
 python3 latent-unit-selection.py   --uses Welford's variance calculator to return latent variables Ld and Lf.
 
+python3 latent-plotter.py      -- script to scatter plot induvidual latent variables. 
+
 ```
