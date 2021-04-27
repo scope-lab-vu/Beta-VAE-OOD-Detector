@@ -9,7 +9,7 @@ We demonstrate our approach using an end-to-end driving Autonomous Vehicle in th
   <img src="https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/videos/HB-scene.gif" />
 </p>
 
-(a)**HP scene** where high precipitation is introduced into the scene. In this scene the detector martingale and the martingale of the precipitation reasoner increases when the high precipitation is introduced.
+(a) **HP scene** where high precipitation is introduced into the scene. In this scene the detector martingale and the martingale of the precipitation reasoner increases when the high precipitation is introduced.
 
 (b) **HB scene** where the brightness is introduced into the scenes.  In this scene the detector martingale and the martingale of the brightness reasoner increases when the high precipitation is introduced. 
 
