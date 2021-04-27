@@ -3,7 +3,7 @@
 Scripts to generate latent variables, and perform latent variable mapping. 
 
 <p align="center">
-   <img src="https://github.com/Shreyasramakrishna90/OOD-B-VAE/blob/master/videos/block-carla.png" align="center" >
+   <img src="https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/figures/latent-mapping.png" align="center" >
 </p>
 
 ```
