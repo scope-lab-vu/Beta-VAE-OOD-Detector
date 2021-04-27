@@ -28,10 +28,3 @@ python3 random_elbo.py        ---random search
 python3 grid_elbo.py          ---grid search
 
 ```
-
-# B-VAE Training
-
-```
-python3 training.py --update the Latents and Beta list with the selected hyperparameters to train. 
-
-```
