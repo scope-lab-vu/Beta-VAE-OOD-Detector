@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-#script to take the trained B-VAE and the validation datasets to generate latent disctirbution csv.
-#row[0] mean, row[1] logvar and row[2] samples.
+#input: script uses the trained B-VAE network to generate latent variable parameters (mean,logvar, and samples) which are stored in a csv.
+#output: A csv file with row[0] -  mean, row[1] - logvar and row[2] - samples. and plots a scatter plot of the latent distributions.
 
 #Libraries
 import random
@@ -20,6 +20,8 @@ import matplotlib.pyplot as plt
 from numpy.random import seed
 from tensorflow import set_random_seed
 set_random_seed(2)
+os.environ["CUDA_VISIBLE_DEVICES"]="2"#Setting the script to run on GPU:1,2
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 def results_transpose(res):
     ret = []
@@ -109,20 +111,27 @@ def plotting(Working_path,dataset,latentsize,folder):
 
 
 if __name__ == '__main__':
+    models = ["30_1.4"] #["30_1.0","30_1.2",
+    run = "brightness"
     #Load image dataset to be plotted
-    path =  "/home/scope/Carla/CARLA_0.9.6/PythonAPI/new/dataset/"
-    model_weights = "/home/scope/Carla/CARLA_0.9.6/PythonAPI/SVDD/B-VAE/B_1.5_L_30_ISORC/"
-    Folders = ["clear-day","clear-day-50","clear-day-70"]
-    x = 30
-    for folder in Folders:
-        image = load_images(path,folder)
-        img = np.array(image[0:len(image)].copy())#test data
-        img = np.reshape(img,[-1, 224,224,3])#Reshape the data
-        File = folder + '.csv'
-        Working_folder = "/home/scope/Carla/B-VAE-OOD-Monitor/latent-unit-extraction/results/"
-        Fadress = Working_folder + File
-        with open(model_weights + 'en_model.json', 'r') as jfile:
-            autoencoder = model_from_json(jfile.read())
-        autoencoder.load_weights(model_weights + 'en_model.h5')
-        test(autoencoder,img,Fadress)#Run the test script
-        plotting(Working_folder,Fadress,x,folder)
+    path =  "/home/scope/Carla/CARLA_0.9.6/PythonAPI/TCPS-data/Test-data/"   #latent-data/"
+    Folders = ["anomaly-detection"] #["s0","p25","p50","b25","b50","p50b50"]
+    for model in models:
+        if(model == "30_1.0" or model == "30_1.2" or model == "30_1.4" or model == "30_1.1"):
+            x = 30
+        if(model == "40_1.0" or model == "40_1.5"):
+            x = 40
+        Working_folder = "/home/scope/Carla/CARLA_0.9.6/PythonAPI/TCPS-results/Latent-extraction/" + model + '/'
+        model_weights = "/home/scope/Carla/CARLA_0.9.6/PythonAPI/TCPS-results/Trained-models-new/"  + model + "/"
+        os.makedirs(Working_folder, exist_ok=True)
+        for folder in Folders:
+            image = load_images(path,folder)
+            img = np.array(image[0:len(image)].copy())#test data
+            img = np.reshape(img,[-1, 224,224,3])#Reshape the data
+            File = folder + '.csv'
+            Fadress = Working_folder + File
+            with open(model_weights + 'en_model.json', 'r') as jfile:
+                autoencoder = model_from_json(jfile.read())
+            autoencoder.load_weights(model_weights + 'en_model.h5')
+            test(autoencoder,img,Fadress)#Run the test script
+            plotting(Working_folder,Fadress,x,folder)

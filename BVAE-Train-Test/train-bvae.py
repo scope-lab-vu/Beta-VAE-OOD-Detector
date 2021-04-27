@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 #libraries
+#Train the B-VAE network with the selected n,B hyperparameters
+#input: Training dataset train.csv
+#output: Saved Encoder network weights, encoder-deconder weights (we do not use this in our work), reconstruction folder with images
 import time
 import random
 import csv
@@ -21,7 +24,9 @@ from keras.layers import Lambda, Input, Dense, MaxPooling2D, BatchNormalization,
 from keras.layers import UpSampling2D, Dropout, Flatten, Reshape, RepeatVector, LeakyReLU,Activation
 from keras.callbacks import ModelCheckpoint
 from keras.losses import mse, binary_crossentropy
-from keras.callbacks import EarlyStopping
+from keras.callbacks import EarlyStopping, LearningRateScheduler
+seed = 7
+np.random.seed(seed)
 from keras.callbacks import CSVLogger
 from keras.callbacks import History
 from itertools import product
@@ -29,28 +34,15 @@ import matplotlib.pyplot as plt
 import prettytable
 from prettytable import PrettyTable
 from sklearn.utils import shuffle
-from sklearn.gaussian_process import GaussianProcessRegressor
-from sklearn.gaussian_process.kernels import RBF, ConstantKernel as C
-from sklearn.preprocessing import StandardScaler
-from keras.callbacks import Callback, LearningRateScheduler
-import warnings
-import sklearn
-import numpy as np
-import matplotlib.pyplot as plt
-from statistics import mean,median
-from keras.callbacks import TerminateOnNaN
 
-plt.style.use('ggplot')
-warnings.filterwarnings("ignore")
-
-os.environ["CUDA_VISIBLE_DEVICES"]="0"#Setting the script to run on GPU:1,2
+os.environ["CUDA_VISIBLE_DEVICES"]="1"#Setting the script to run on GPU:1 (remove this if you do not have a gpu)
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 
 
 #Load complete input images without shuffling
 def load_training_images(train_data):
     inputs = []
-    comp_inp = []
     with open(train_data + 'train.csv', 'rt') as csvfile:
             reader = csv.reader(csvfile)
             for row in reader:
@@ -58,27 +50,19 @@ def load_training_images(train_data):
                 img = cv2.resize(img, (224, 224))
                 img = img / 255.
                 inputs.append(img)
-            for i in range(0,len(inputs),3):
-                    comp_inp.append(inputs[i])
-            print("Total number of images:%d" %len(comp_inp))
-            return inputs, comp_inp
+            print("Total number of images:%d" %len(inputs))
+            return inputs
 
 #Reshape input images
 def data_reshape(input_image):
-    img_train, img_test = np.array(input_image[0:len(input_image)-200].copy()), np.array(input_image[len(input_image)-200:len(input_image)].copy())
+    img_train, img_test = np.array(input_image[0:len(input_image)-300].copy()), np.array(input_image[len(input_image)-300:len(input_image)].copy())
     img_train = np.reshape(img_train, [-1, img_train.shape[1],img_train.shape[2],img_train.shape[3]])
     img_test = np.reshape(img_test, [-1, img_test.shape[1],img_test.shape[2],img_test.shape[3]])
     inp = (img_train, img_test)
     return inp
 
-class new_callback(tf.keras.callbacks.Callback):
-    def epoch_end(epoch, logs={}):
-        if(logs.get('val_loss') == nan): # select the accuracy
-            print("\n !!! no further training !!!")
-            model.stop_training = True
-
 #Create the Beta-VAE model
-def CreateModels(nl, b, inp,call1,dir_path,folder):
+def CreateModels(nl, b):
     #sampling function of the Beta-VAE
     def sample_func(args):
         z_mean, z_log_var = args
@@ -167,63 +151,91 @@ def CreateModels(nl, b, inp,call1,dir_path,folder):
         return vae_loss
 
     def lr_scheduler(epoch): #learningrate scheduler to adjust learning rate.
-        lr = 1e-5
-        if epoch > 35:
-            print("New learning rate")
-            lr = 1e-6
-        if(epoch > 75):
-            lr = 1e-8
+        lr = 1e-4
+        if epoch > 100:
+            #print("New learning rate")
+            lr = 1e-5
+        if(epoch > 125):
+             lr = 1e-6
         return lr
 
     scheduler = LearningRateScheduler(lr_scheduler)
-    #Define adam optimizer
-    adam = keras.optimizers.Adam(lr=1e-6, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
-    autoencoder.compile(optimizer='adam',loss=vae_loss, metrics=[vae_loss])
-    hist = train_wo_s(inp,autoencoder,scheduler,2,16,call1,dir_path,folder)
-    SaveAutoencoderModel(autoencoder,dir_path,folder)
-    SaveEncoderModel(encoder,dir_path,folder)
 
-#Train the model without saving for hyperparameter tuning.
-def train_wo_s(X,autoencoder,scheduler,epoch_number,batch_size_number,call1,dir_path,folder):
+    #Define adam optimizer
+    adam = keras.optimizers.Adam(lr=0.0000001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+    autoencoder.compile(optimizer='adam',loss=vae_loss, metrics=[vae_loss])
+
+    return autoencoder, encoder, z_log_var,scheduler
+
+#Train and save the B-VAE models
+def train_w_s(X,autoencoder,epoch_number,batch_size_number,path,dir_path,scheduler):
     X_train,X_test = X
-    data = CSVLogger(dir_path + folder + '/loss.csv', append=True, separator=';')
-    filePath = dir_path + folder + '/weights.best.hdf5'#checkpoint weights
+    data = CSVLogger(dir_path + '/loss.csv', append=True, separator=';')
+    filePath = dir_path + '/weights.best.hdf5'#checkpoint weights
     checkpoint = ModelCheckpoint(filePath, monitor='vae_loss', verbose=1, save_best_only=True, mode='min')
-    callbacks_list = [EarlyStopping(monitor='val_loss', mode='min', patience=10, verbose=0),call1,scheduler,checkpoint] #callback list
-    hist=autoencoder.fit(X_train, X_train,epochs=epoch_number,batch_size=batch_size_number,shuffle=True,validation_data=(X_test, X_test), callbacks=callbacks_list, verbose=2)
-    return hist
+    EarlyStopping(monitor='vae_loss', patience=40, verbose=0),
+    callbacks_list = [checkpoint, data]
+    autoencoder.fit(X_train, X_train,epochs=epoch_number,batch_size=batch_size_number,shuffle=True,validation_data=(X_test, X_test),callbacks=callbacks_list, verbose=2)
 
 #Save the autoencoder model
-def SaveAutoencoderModel(autoencoder,dir_path,folder):
+def SaveAutoencoderModel(autoencoder,dir_path):
 	auto_model_json = autoencoder.to_json()
-	with open(dir_path + folder + '/auto_model.json', "w") as json_file:
+	with open(dir_path + '/auto_model.json', "w") as json_file:
 		json_file.write(auto_model_json)
-	autoencoder.save_weights(dir_path + folder + '/auto_model.h5')
+	autoencoder.save_weights(dir_path + '/auto_model.h5')
 	print("Saved Autoencoder model to disk")
 
 #Save the encoder model
-def SaveEncoderModel(encoder,dir_path,folder):
+def SaveEncoderModel(encoder,dir_path):
 	en_model_json = encoder.to_json()
-	with open(dir_path + folder + '/en_model.json', "w") as json_file:
+	with open(dir_path + '/en_model.json', "w") as json_file:
 		json_file.write(en_model_json)
-	encoder.save_weights(dir_path + folder + '/en_model.h5')
+	encoder.save_weights(dir_path + '/en_model.h5')
 	print("Saved Encoder model to disk")
 
+#Test the trained models on a different test data
+def test(autoencoder,encoder,test):
+    autoencoder_res = autoencoder.predict(test)
+    encoder_res = encoder.predict(test)
+    res_x = test.copy()
+    res_y = autoencoder_res.copy()
+    res_x = res_x * 255
+    res_y = res_y * 255
+
+    return res_x, res_y, encoder_res
+
+#Save the reconstructed test data in a separate folder.
+#For this create a folder named results in the directory you are working in.
+def savedata(test_in, test_out, test_encoded, Working_path):
+    trainfolder = Working_path + "reconstruction" + '/'
+    os.makedirs(trainfolder, exist_ok=True)
+    for i in range(len(test_in)):
+        test_in = np.reshape(test_in,[-1, 224,224,3])#Reshape the data
+        test_out = np.reshape(test_out,[-1, 224,224,3])#Reshape the data
+        cv2.imwrite(trainfolder + str(i) +'_in.png', test_in[i])
+        cv2.imwrite(trainfolder + str(i) +'_out.png', test_out[i])
+
+
 if __name__ == '__main__':
-    train_data = "/home/scope/Carla/CARLA_0.9.6/PythonAPI/SVDD/data-generator/Trial4/"
-    dir_path = '/home/scope/Carla/B-VAE-OOD-Monitor/hyperparameter-tuning/trained-models/'
-    comp_inp,input_image = load_training_images(train_data)
+    train_data = "/home/scope/Carla/CARLA_0.9.6/PythonAPI/TCPS-data/Train-data/"
+    input_image = load_training_images(train_data)
     input_image = shuffle(input_image)
-    print(len(input_image))
     inp = data_reshape(input_image)
-    call1 = new_callback()
-    Latents = [30] #selected latent units
-    betas = [1.0]#selected beta values
-    training_combinations_list = [list(x) for x in product(Latents,betas)]
-    for combination in training_combinations_list:
-        folder = "Trial_%d_%0.1f"%(int(combination[0]),round(combination[1],2))
-        os.makedirs(dir_path + folder + '/', exist_ok=True)
-        print("******************************Training******************************************")
-        time1=time.time()
-        CreateModels(combination[0],combination[1],inp,call1,dir_path,folder)
-        print(time.time()-time1)
+    Latents = 30#hyperparameter1
+    betas = [1.4]#,1.3,1.4,1.5,2.0,3.0,4.0,5.0]#hyperparameter2
+    epoch_number=150 #epoch numbers for hyperparameter tuning and training
+    batch_size_number=16 #batch size for hyperparameter tuning and training
+    path = "/home/scope/Carla/CARLA_0.9.6/PythonAPI/SVDD/"
+    print("******************************Hyperparameter Tuning******************************************")
+    #rand_x, rand_y=hyperparameter_search(trial,iterations,Latents,betas,inp,epoch_number,batch_size_number)# call the hyperparameter tuning function
+    print("******************************Training******************************************")
+    for i in range(len(betas)):
+        dir_path = "/home/scope/Carla/CARLA_0.9.6/PythonAPI/TCPS-results/Trained-models/"
+        data_store = dir_path + '%d_%0.1f'%(Latents,betas[i]) + '/'
+        os.makedirs(data_store, exist_ok=True)
+        autoencoder,encoder,z_log_var,scheduler = CreateModels(Latents,betas[i])# Running the autoencoder model
+        train_w_s(inp,autoencoder,epoch_number,batch_size_number,path,data_store,scheduler)#Train the selected B-VAE parameters and train the models and save them.
+        SaveAutoencoderModel(autoencoder,data_store)#Save full autoencoder model
+        SaveEncoderModel(encoder,data_store)#Save encoder model
+        test_in, test_out, test_encoded = test(autoencoder,encoder,inp[1])#Test the autoencoder model with training weights.
+        savedata(test_in, test_out, test_encoded, data_store)#Save the data
