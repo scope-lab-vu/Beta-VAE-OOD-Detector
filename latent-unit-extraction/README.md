@@ -1,6 +1,10 @@
-# Latent unit generation and extraction
+# Latent Variable Mapping
 
-Scripts to generate latent variables, and perform latent variable mapping
+Scripts to generate latent variables, and perform latent variable mapping. 
+
+<p align="center">
+   <img src="https://github.com/Shreyasramakrishna90/OOD-B-VAE/blob/master/videos/block-carla.png" align="center" >
+</p>
 
 ```
 
