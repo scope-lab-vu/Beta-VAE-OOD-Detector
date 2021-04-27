@@ -6,6 +6,10 @@ Scripts to generate latent variables, and perform latent variable mapping. Figur
    <img src="https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/figures/latent-mapping.png" align="center" >
 </p>
 
+LP - Partition latent variables with high variance in average KL-divergence
+Ld - Detector latent variables
+Lf - Reasoner Latent variables
+
 ```
 
 python3 latent-csv-generator.py    --use the trained B-VAE weights to generate csv with latent variable parameters (mean, logvar, samples).
