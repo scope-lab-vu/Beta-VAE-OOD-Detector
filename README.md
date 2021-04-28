@@ -1,6 +1,6 @@
 # Efficient Out-of-Distribution Detection Using Latent Space of B-VAE for Cyber-Physical Systems
 
-In this work we introduce the B-Variational Autoencoder (B-VAE) to detect out-of-Distribution images and identify the most likely feature (e.g.,brightness, precipitation,etc.) that caused the OOD. Typically, this is a multi-label anomaly detection problem which is solved using a chain of one-class classifiers. However, in this work we use a single efficient B-VAE deector that uses the principle of disentanglement to train the latent space to be sensitive to distribution shifts in different features. 
+In this work we use a single B-Variational Autoencoder (B-VAE) to detect out-of-Distribution images and identify the most likely feature (e.g.,brightness, precipitation,etc.) that is responsible for the OOD. Typically, this is a multi-label anomaly detection problem which is solved using a chain of one-class classifiers. However, in this work we use a single efficient B-VAE detector that uses the principle of disentanglement to train the latent space to be sensitive to distribution shifts in different image features. 
 
 We demonstrate our approach using an end-to-end driving Autonomous Vehicle in the CARLA simulation. 
 
@@ -9,9 +9,9 @@ We demonstrate our approach using an end-to-end driving Autonomous Vehicle in th
   <img src="https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/figures/HB-scene.gif" />
 </p>
 
-(a) **HP scene** where high precipitation is introduced into the scene. In this scene the detector martingale and the martingale of the precipitation reasoner increases when the high precipitation is introduced.
+(a) **High Precipitation scene** where high precipitation is introduced into the scene. In this scene the detector martingale and the martingale of the precipitation reasoner increases when the high precipitation is introduced.
 
-(b) **HB scene** where the brightness is introduced into the scenes.  In this scene the detector martingale and the martingale of the brightness reasoner increases when the high precipitation is introduced. 
+(b) **High Brightness scene** where the brightness is introduced into the scenes.  In this scene the detector martingale and the martingale of the brightness reasoner increases when the high precipitation is introduced. 
 
 Videos of the B-VAE detector for additional test scenes are available [here](https://drive.google.com/drive/folders/18lKYGrvMgaqsDhl_Xsp_1IgJQEbR1T29?usp=sharing)
 
