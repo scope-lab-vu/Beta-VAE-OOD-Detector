@@ -5,7 +5,7 @@ The script connects with CARLA 0.9.6 and generates different scenes by randomly 
 
 We use a scenario description DSML written in [textX](https://textx.github.io/textX/stable/) to generate different scenes with different weather patterns. 
 
-[Scenrio.entity](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/data-generation/textx-scenario-description/demo/scene.entity) -- Has the entities of a CARLA scenarion. The entities are town name, weather, ego_agent, other_agent, global_route, and hazard_list.
+[Scene.entity](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/data-generation/textx-scenario-description/demo/scene.entity) -- Has the entities of a CARLA scene. The entities are sun_angle, cloudiness, precipitation, brightness, and road_segments. These parameters can take a continuous or discrete value. 
 
 [entity.tx](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/data-generation/textx-scenario-description/demo/entity.tx) -- Has the grammer for the scenario description language. 
 
