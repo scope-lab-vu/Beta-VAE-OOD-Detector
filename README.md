@@ -20,7 +20,7 @@ Videos of the B-VAE detector for additional test scenes are available [here](htt
 To run the CARLA setup with varied weather patterns and evaluate the B-VAE detector for OOD detection, clone this repo.
 
 ```
-git clone https://github.com/scope-lab-vu/BVAE-OOD-Detector.git
+git clone https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector.git
 ```
 Then create a conda environment with python 3.7 and install the requirements as follows.
 
@@ -28,7 +28,7 @@ Then create a conda environment with python 3.7 and install the requirements as 
 To run this setup first create a virtual environment with python 3.7
 conda create -n py37 python=3.7
 conda activate py37
-cd ${B-VAE-OOD-Monitor}  # Change ${B-VAE-OOD-Monitor} for your CARLA root folder
+cd ${Beta-VAE-OOD-Monitor}  # Change ${Beta-VAE-OOD-Monitor} for your CARLA root folder
 pip3 install -r requirements.txt
 ```
 You will also need to install CARLA 0.9.6. See [link](https://carla.org/2019/07/12/release-0.9.6/) for more instructions.
