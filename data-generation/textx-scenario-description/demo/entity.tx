@@ -1,0 +1,22 @@
+EntityModel:
+    entities+=Entity
+;
+
+Entity:
+  'entity' name=ID '{'
+        properties*=Property
+  '}'
+;
+
+Property:
+    name=ID ':' value=Value
+;
+
+
+Value:
+     '('min=NUMBER','max=NUMBER','distribution=INT','sampler=STRING')' | '('min=NUMBER','distribution=INT')'
+;
+
+Comment:
+  /\/\/.*$/
+;
