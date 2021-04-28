@@ -35,17 +35,17 @@ DISPLAY= ./CarlaUE4.sh -opengl    ---to start CARLA server (Terminal1)
 Running the simulation generates images and labels are stored in a folder. A sample csv file with images and labels is available [here](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/data-generation/labels.csv)
 
 **label Description**
-label 0  - precipitation = 0%
-label 1  - precipitation <= 25%
-label 2  - precipitation > 25%
-label 3  - brightness = 0%
-label 4  - brightness <= 25%
-label 5  - brightness > 25%
-label 6  - road_segment = 0
-label 7  - road_segment = 1
-label 8  - road_segment = 2
-label 9  - road_segment = 6
-label 10  - road_segment = others
+label 0  - precipitation = 0%,
+label 1  - precipitation <= 25%,
+label 2  - precipitation > 25%,
+label 3  - brightness = 0%,
+label 4  - brightness <= 25%,
+label 5  - brightness > 25%,
+label 6  - road_segment = 0,
+label 7  - road_segment = 1,
+label 8  - road_segment = 2,
+label 9  - road_segment = 6,
+label 10  - road_segment = others,
 
 
 
