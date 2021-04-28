@@ -35,7 +35,7 @@ You will also need to install CARLA 0.9.6. See [link](https://carla.org/2019/07/
 
 **Download** Training dataset and data for test scenes can be downloaded [here](https://drive.google.com/drive/folders/1IyHTLzYISViWN6EgU00b5P7-EC2LnqXY?usp=sharing)
 
-# Steps to implement the B-VAE detector for OOD detection in CARLA simulator
+# B-VAE detector Design and Deployment in CARLA simulation
 
 
 1.  [data generation](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/tree/main/data-generation) -- Generate CARLA scenes with varied weather parameters. 
