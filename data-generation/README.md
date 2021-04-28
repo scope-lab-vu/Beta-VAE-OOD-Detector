@@ -5,25 +5,27 @@ The script connects with CARLA 0.9.6 and generates different scenes by randomly 
 
 We use a scenario description DSML written in [textX](https://textx.github.io/textX/stable/) to generate different scenes with different weather patterns. 
 
-[Scenrio.entity](https://github.com/scope-lab-vu/Resonate/blob/main/scenario-description/scenario.entity) -- Has the entities of a CARLA scenarion. The entities are town name, weather, ego_agent, other_agent, global_route, and hazard_list.
+[Scenrio.entity](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/data-generation/textx-scenario-description/demo/scene.entity) -- Has the entities of a CARLA scenarion. The entities are town name, weather, ego_agent, other_agent, global_route, and hazard_list.
 
-[entity.tx](https://github.com/scope-lab-vu/Resonate/blob/main/scenario-description/entity.tx) -- Has the grammer for the scenario description language. 
+[entity.tx](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/data-generation/textx-scenario-description/demo/entity.tx) -- Has the grammer for the scenario description language. 
 
-[sceneparser.py](https://github.com/scope-lab-vu/Resonate/blob/main/scenario-description/scenario-generator.py) -- Parses the scenario language as python object and fills in the required values for each entity. Then an XML is generated that can be used in CARLA.
+[sceneparser.py](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/data-generation/textx-scenario-description/demo/sceneparser.py) -- Parses the scenario language as python object and fills in the required values for each scene parameter. Then a json file with the scene paramters is generated, which will be used by the simulator.
 
-[sample xml files](https://github.com/scope-lab-vu/Resonate/tree/main/scenario-description/Scenario-example/simulation1) -- The sample xml files generated for CARLA. 
+[scenes](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/data-generation/textx-scenario-description/scenes/) -- Has a sample scene specification json file for CARLA simulation. 
 
 Scenario.dot, entity.dot -- metamodel figures of the scenario description and the textual language. Read the [docs](https://textx.github.io/textX/stable/) to convert it to png.
+
+# Data generation using scene specification files
 
 To generate scenes with different weather patterns, activate the virtual environment using source demo/bin/activate. Then run the following commands to generate different simulation scenarios.
 
 ```
 cd demo
 textx generate entity.tx --target dot
-textx generate scenario.entity --grammar entity.tx --target dot
-python3 scenario-generator.py 
+textx generate scene.entity --grammar entity.tx --target dot
+python3 sceneparser.py 
 ```
-The scene generator takes a route xml file from the Carla AD challenge, and generates one simulation run by randomly samples the route with different weather patterns to generate different scenes. A sample simulation xml files are shown in [folder](https://github.com/Shreyasramakrishna90/Resonate-Dynamic-Risk/tree/main/resonate-carla/leaderboard/data/my_routes)
+Once the scene specification json files are generated, they will be used by the simulator. sdl-data-generation.py script will read each scene specification file and uses it in the CARLA simulator. Then, the generated images and labels are stored in a folder. 
 
 ```
 DISPLAY= ./CarlaUE4.sh -opengl    ---to start CARLA server (Terminal1)
@@ -31,6 +33,5 @@ DISPLAY= ./CarlaUE4.sh -opengl    ---to start CARLA server (Terminal1)
 ./data_generation.sh              ---to start data_generator client (Terminal2)
 ```
 
-Launching data_generation.sh script will prompt a few simulation parameters. (1) the number of scenes to be generated, (2) the number of images for each scene, and (3) the folder to store the scenes
 
 
