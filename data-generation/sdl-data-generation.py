@@ -41,15 +41,16 @@ def set_weather(c,p,s):
     return weather
 
 #Function to save steering actuation values.
-def save_data(m,label1,label2,label3,data_folder):
+def save_data(m,label1,label2,label3,data_folder,steer):
     filename = data_folder+'/labels.csv'
     file_exists = os.path.isfile(filename)
     fields = ['frames',
-                        'precipitation',
-                        'brightness',
-                        'road_segment']
+            'precipitation',
+            'brightness',
+            'road_segment',
+            'steer']
 
-    dict = [{'frames':'frame%d.png'%m,'precipitation':label1,'brightness':label2,'road_segment':label3}]
+    dict = [{'frames':'frame%d.png'%m,'precipitation':label1,'brightness':label2,'road_segment':label3,'steer':steer}]
 
     with open(filename, 'a') as file:
             writer = csv.DictWriter(file, fieldnames = fields)
@@ -164,23 +165,20 @@ def main(save_path,arguments,scene_list_data):
             print('created %s' % center_camera.type_id)
             time.sleep(4)
             center_camera.listen(color_image_queue.put)#center_camera image in a queue
-            #Left_camera.listen(seg_image_queue.put)#Left_camera image in a queue
             colsensor.listen(col_queue.put)#collision sensor image in a queue
             weather = set_weather(scene_list_data[i]['sun'],scene_list_data[i]['cloudiness'],scene_list_data[i]['precipitation'])
             world.set_weather(weather)#Function to set weather
             l=0 #variable to track image count
-            x=1
             while (l<arguments.images):#number of images to be collected
                 try:
                     vehicle.set_autopilot(True)
                     image = color_image_queue.get()
                     process_img(image)
+                    steer = round(vehicle.get_control().steer,3)
                     image.save_to_disk(data_folder+ '/frame%d'% (m))#save images
-                    save_data(m,label1,label2,label3,data_folder)
-                    #save_data(vehicle.get_control().steer)#save steer data
-                    print(round(vehicle.get_control().steer,3))
-                    l+=1
-                    m+=1
+                    save_data(m,label1,label2,label3,data_folder,steer)
+                    l+=1 #local counter increment
+                    m+=1 #global counter increment
                 except KeyboardInterrupt:
                     sys.exit()
 
