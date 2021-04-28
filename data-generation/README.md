@@ -15,8 +15,6 @@ We use a scenario description DSML written in [textX](https://textx.github.io/te
 
 Scenario.dot, entity.dot -- metamodel figures of the scenario description and the textual language. Read the [docs](https://textx.github.io/textX/stable/) to convert it to png.
 
-# Data generation using scene specification files
-
 To generate scenes with different weather patterns, activate the virtual environment using source demo/bin/activate. Then run the following commands to generate different simulation scenarios.
 
 ```
@@ -25,6 +23,8 @@ textx generate entity.tx --target dot
 textx generate scene.entity --grammar entity.tx --target dot
 python3 sceneparser.py 
 ```
+# Data generation using scene specification files
+
 Once the scene specification json files are generated, they will be used by the simulator. sdl-data-generation.py script will read each scene specification file and uses it in the CARLA simulator. Then, the generated images and labels are stored in a folder. 
 
 ```
