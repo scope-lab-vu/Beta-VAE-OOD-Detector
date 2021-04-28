@@ -1,6 +1,6 @@
 # Efficient Out-of-Distribution Detection Using Latent Space of B-VAE for Cyber-Physical Systems
 
-In this work we introduce the B-Variational Autoencoder (B-VAE) to detect out-of-Distribution images and identify the most likely feature (e.g.,brightness, precipitation,etc.) that caused the OOD. Typically, this is a multi-class classification problem solved using a chain of one-class classifiers. However, in this work we use a single efficient B-VAE deector that uses the principle of disentanglement to train the latent space to be sensitive to distribution shifts in different features. 
+In this work we introduce the B-Variational Autoencoder (B-VAE) to detect out-of-Distribution images and identify the most likely feature (e.g.,brightness, precipitation,etc.) that caused the OOD. Typically, this is a multi-label anomaly detection problem which is solved using a chain of one-class classifiers. However, in this work we use a single efficient B-VAE deector that uses the principle of disentanglement to train the latent space to be sensitive to distribution shifts in different features. 
 
 We demonstrate our approach using an end-to-end driving Autonomous Vehicle in the CARLA simulation. 
 
