@@ -19,8 +19,6 @@ Additional videos are available [here](https://drive.google.com/drive/folders/18
 
 To run the CARLA setup with varied weather patterns and evaluate the B-VAE detector for OOD detection, clone this repo.
 
-Training dataset and data for test scenes can be downloaded [here](https://drive.google.com/drive/folders/1IyHTLzYISViWN6EgU00b5P7-EC2LnqXY?usp=sharing)
-
 ```
 git clone https://github.com/scope-lab-vu/BVAE-OOD-Detector.git
 ```
@@ -34,6 +32,8 @@ cd ${B-VAE-OOD-Monitor}  # Change ${B-VAE-OOD-Monitor} for your CARLA root folde
 pip3 install -r requirements.txt
 ```
 You will also need to install CARLA 0.9.6. See [link](https://carla.org/2019/07/12/release-0.9.6/) for more instructions.
+
+**Download** Training dataset and data for test scenes can be downloaded [here](https://drive.google.com/drive/folders/1IyHTLzYISViWN6EgU00b5P7-EC2LnqXY?usp=sharing)
 
 # Steps to implement the B-VAE detector for OOD detection in CARLA simulator
 
