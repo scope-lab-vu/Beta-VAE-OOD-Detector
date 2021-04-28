@@ -1,5 +1,5 @@
 # data generation
-The script connects with CARLA 0.9.6 and generates different scenes by randomly varying CARLA weather parameters. To generate data run the following
+The script connects with CARLA 0.9.6 and generates different scenes by randomly varying CARLA weather parameters and road segments.
 
 # TextX Based Scene Generation in CARLA Simulation
 
