@@ -25,7 +25,7 @@ python3 sceneparser.py
 ```
 # Data generation using scene specification files
 
-Once the scene specification json files are generated, they will be used by the simulator. sdl-data-generation.py script will read each scene specification file and uses it in the CARLA simulator. Then, the generated images and labels are stored in a folder. A sample csv file with images and labels is available [here]()
+Once the scene specification json files are generated, they will be used by the simulator. sdl-data-generation.py script will read each scene specification file and uses it in the CARLA simulator. Then, the generated images and labels are stored in a folder. A sample csv file with images and labels is available [here](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/data-generation/labels.csv)
 
 ```
 DISPLAY= ./CarlaUE4.sh -opengl    ---to start CARLA server (Terminal1)
