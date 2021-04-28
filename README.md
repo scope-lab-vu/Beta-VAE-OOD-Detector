@@ -19,6 +19,8 @@ Additional videos are available [here](https://drive.google.com/drive/folders/18
 
 To run the CARLA setup with varied weather patterns and evaluate the B-VAE detector for OOD detection, clone this repo.
 
+Training dataset and data for test scenes can be downloaded [here](https://drive.google.com/drive/folders/1IyHTLzYISViWN6EgU00b5P7-EC2LnqXY?usp=sharing)
+
 ```
 git clone https://github.com/scope-lab-vu/BVAE-OOD-Detector.git
 ```
