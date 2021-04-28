@@ -13,7 +13,7 @@ We demonstrate our approach using an end-to-end driving Autonomous Vehicle in th
 
 (b) **HB scene** where the brightness is introduced into the scenes.  In this scene the detector martingale and the martingale of the brightness reasoner increases when the high precipitation is introduced. 
 
-Additional videos are available [here](https://drive.google.com/drive/folders/18lKYGrvMgaqsDhl_Xsp_1IgJQEbR1T29?usp=sharing)
+Videos of the B-VAE detector for additional test scenes are available [here](https://drive.google.com/drive/folders/18lKYGrvMgaqsDhl_Xsp_1IgJQEbR1T29?usp=sharing)
 
 # Setup
 
