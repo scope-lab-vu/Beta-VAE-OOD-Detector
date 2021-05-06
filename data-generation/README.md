@@ -47,6 +47,15 @@ label 8  - road_segment = 2,
 label 9  - road_segment = 6,
 label 10  - road_segment = others,
 
+# Data Partitioning
+
+Once the label csv is generated, we can bin the data into several partitions based on the variance in label values. To generate partitions run the following script. 
+
+```
+python2 data-bins-partitions.py
+```
+
+
 
 
 
