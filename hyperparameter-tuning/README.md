@@ -29,4 +29,4 @@ python3 grid_elbo.py          ---grid search
 
 ```
 
-**Note**: We require the images and CSV files generated in the [data generation]() step.  
+**Note**: We require the images and CSV files generated in the [data generation](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/tree/main/data-generation) step.  
