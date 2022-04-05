@@ -1,5 +1,8 @@
-# data generation
-The script connects with CARLA 0.9.6 and generates different scenes by randomly varying CARLA weather parameters and road segments.
+# Data Generation
+The script connects with CARLA 0.9.6 and generates different scenes by randomly varying CARLA weather parameters and road segments. The outputs of this step are forward facing camera images and  
+
+# Downloads
+We used CARLA version 0.9.6 in the paper. You can get the pre-compiled simulator from [here](https://carla.readthedocs.io/en/0.9.6/download/). 
 
 # TextX Based Scene Generation in CARLA Simulation
 
@@ -32,7 +35,7 @@ DISPLAY= ./CarlaUE4.sh -opengl    ---to start CARLA server (Terminal1)
 
 ./data_generation.sh              ---to start data_generator client (Terminal2)
 ```
-Running the simulation generates images and labels are stored in a folder. A sample csv file with images and labels is available [here](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/data-generation/labels.csv)
+**Output**: Running the data generation script with the simulator generates images and labels that are stored in a folder specified in the script. **The CSV file has lables of different environmental conditions (e.g., brightness, precipitation) and steering values**. A sample csv file with images and labels is available [here](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/data-generation/labels.csv).
 
 **label Description**
 label 0  - precipitation = 0%,
