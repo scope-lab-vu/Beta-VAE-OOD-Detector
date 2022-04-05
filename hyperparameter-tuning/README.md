@@ -1,6 +1,6 @@
 # Latent Space Encoding for B-VAE Hyperparameter Selection
 
-Scripts here are used to select hyperparameters, number of latent units (n) and B. Three hyperparameter tuning algorithms that are compared in our work.
+Scripts here are used to select hyperparameters, the number of latent units (n), and Beta. We compared three hyperparameter tuning algorithms in this work, they are.
 
 (1) Bayesian Optimization, (2) Random Search, and (3) Grid Search
 
@@ -29,4 +29,4 @@ python3 grid_elbo.py          ---grid search
 
 ```
 
-**Note**: We require the images and CSV files generated in the [data generation](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/tree/main/data-generation) step.  
+**Note**: We require the images and CSV files generated in the [data generation](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/tree/main/data-generation) step. mig_numgenerative, mig_sampling_value, and mig_iterations are parameters that need to be provided. **mig_numgenerative** is the number of labels (e.g., brightness, precipitation) that is known during data generation. **mig_sampling_value** is the number of sampling needed in computing MIG (default = 100). Sampling is required because MIG is based on entropy computation. Refer to the original paper on [MIG](https://proceedings.neurips.cc/paper/2018/hash/1ee3dfcd8a0645a25a35977997223d22-Abstract.html) for more information. **mig_iterations** we compute an average MIG score. We do this to stabilize the score as it is based on sampling. 
