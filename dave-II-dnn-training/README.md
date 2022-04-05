@@ -10,5 +10,4 @@ python3 performance-calculator.py      --- Measure the performance of the traine
 ```
 
 **Note**: Accordingly, split the CSV file generated in the [data generation](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/tree/main/dave-II-dnn-training) step to create training and testing data files. 
-Dear Editor,
 
