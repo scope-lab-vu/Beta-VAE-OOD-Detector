@@ -39,7 +39,7 @@ DISPLAY= ./CarlaUE4.sh -opengl    ---to start CARLA server (Terminal1)
 ```
 The data_generation script reads the json files previously generated and then loads it into the simulator. 
 
-**Output**: Running the data generation script with the simulator generates images and labels that are stored in a folder specified in the script. **The CSV file has lables of different environmental conditions (e.g., brightness, precipitation) and steering values**. A sample csv file with images and labels is available [here](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/data-generation/labels.csv).
+**Output**: Running the data generation script with the simulator generates images and labels that are stored in a folder specified in the script. **The CSV file has lables of different environmental conditions (e.g., brightness, precipitation) and steering values**. A sample csv file with images and labels is available [here](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/data-generation/labels.csv). The CSV file is also split into **train.csv** and **calibration.csv** files. The train.csv files is used to train the detector and the calibration file is used in the Inductive Conformal Prediction (ICP) procedure during runtime detection. 
 
 **label Description**
 label 0  - precipitation = 0%,
