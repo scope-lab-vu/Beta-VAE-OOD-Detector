@@ -28,3 +28,5 @@ python3 random_elbo.py        ---random search
 python3 grid_elbo.py          ---grid search
 
 ```
+
+**Note**: We require the images and CSV files generated in the [data generation]() step.  
