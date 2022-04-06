@@ -1,24 +1,24 @@
-# Latent Variable Mapping
+# Latent Unit Mapping
 
-Scripts to generate latent units and perform the latent unit mapping. The figure illustrates the latent variable mapping heuristic.
+Scripts to generate latent units and perform the latent unit mapping. The figure illustrates the latent unit mapping heuristic.
 
 <p align="center">
    <img src="https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/blob/main/figures/latent-mapping.png" align="center" >
 </p>
 
 LP - Partition latent variables with high variance in average KL-divergence\
-Ld - Detector latent variables\
-Lf - Reasoner Latent variables
+Ld - Detector latent units\
+Lf - Reasoner Latent units
 
 ```
 
-python3 latent-csv-generator.py    --use the trained B-VAE weights to generate CSV with latent variable parameters (mean, logvar, samples).
+python3 latent-csv-generator.py    --use the trained B-VAE weights to generate CSV with latent unit parameters (mean, logvar, samples).
 
 python3 latent-unit-comparison.py  --generate CSV with average KL-divergence of each latent unit for different scenes in a partition.
 
-python3 latent-unit-selection.py   --uses Welford's variance calculator to return latent variables Ld and Lf.
+python3 latent-unit-selection.py   --uses Welford's variance calculator to return latent units Ld and Lf.
 
-python3 latent-plotter.py      -- script to scatter plot induvidual latent variables. 
+python3 latent-plotter.py      -- script to scatter plot induvidual latent unit. 
 
 ```
 
