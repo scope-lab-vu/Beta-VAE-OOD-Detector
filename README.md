@@ -68,5 +68,10 @@ Please follow these steps in order to generate data, design the OOD detector and
 3. Latent Variable mapping Heuristic -- We perform a KL-divergence to perform a mapping between the latent variables and the sensitive features.
 
 3. Comparison to existing technologies -- We compare our B-VAE detector with other techniques such as SVDD, VAE based reconstruction, SVDD-chain, and VAE-reconstruction-chain. 
+ 
+# References
+
+1. [B-VAE paper](https://openreview.net/forum?id=Sy2fzU9gl) 
+2. [Mutual Information Gap](https://proceedings.neurips.cc/paper/2018/hash/1ee3dfcd8a0645a25a35977997223d22-Abstract.html)
 
 
