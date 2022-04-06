@@ -37,7 +37,15 @@ You will also need to install CARLA 0.9.6. See [link](https://carla.org/2019/07/
 
 # B-VAE detector Design and Deployment in CARLA simulation
 
-Please follow these steps in order to generate data, design the OOD detector and then perform runtime detection. Follow the readme in each of the folders listed below for more information about these steps.
+Please follow these steps in order to generate data, design the OOD detector and then perform runtime detection. The workflow shows the order in which different steps work and their outputs. 
+
+
+<p align="center">
+   <img src="figures/workflow.png" align="center" >
+</p>
+
+
+Follow the readme in each of the folders listed below for more information about these steps.
 
 
 1.  [data generation](https://github.com/scope-lab-vu/Beta-VAE-OOD-Detector/tree/main/data-generation) -- Generate CARLA scenes with varied weather parameters. 
